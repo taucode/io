@@ -5,15 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace TauCode.IO.Tests
+namespace TauCode.IO.Tests;
+
+[TestFixture]
+public class DummyFixture
 {
-    [TestFixture]
-    public class DummyFixture
+    [Test]
+    public void DummyTest()
     {
-        [Test]
-        public void DummyTest()
-        {
-            Assert.Pass("Added to pass DevOps.");
-        }
+        Assert.Pass("Added to pass DevOps.");
     }
 }

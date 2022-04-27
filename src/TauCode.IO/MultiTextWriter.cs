@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// todo move to taucode.io
 namespace TauCode.IO
 {
     public class MultiTextWriter : TextWriter
