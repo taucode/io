@@ -1,71 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
-namespace TauCode.IO
+namespace TauCode.IO;
+
+public class MultiTextWriter : TextWriter
 {
-    public class MultiTextWriter : TextWriter
+    private readonly List<TextWriter> _innerWriters;
+
+    public MultiTextWriter(Encoding encoding, IEnumerable<TextWriter> innerWriters)
     {
-        private readonly List<TextWriter> _innerWriters;
+        this.Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
 
-        public MultiTextWriter(Encoding encoding, IEnumerable<TextWriter> innerWriters)
+        if (innerWriters == null)
         {
-            this.Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
-
-            if (innerWriters == null)
-            {
-                throw new ArgumentNullException(nameof(innerWriters));
-            }
-
-            _innerWriters = innerWriters.ToList();
-            if (_innerWriters.Any(x => x == null))
-            {
-                throw new ArgumentException($"'{nameof(innerWriters)}' cannot contain nulls.");
-            }
+            throw new ArgumentNullException(nameof(innerWriters));
         }
 
-        public override Encoding Encoding { get; }
-
-        public IReadOnlyList<TextWriter> InnerWriters => _innerWriters;
-
-        public override void Write(char value)
+        _innerWriters = innerWriters.ToList();
+        if (_innerWriters.Any(x => x == null))
         {
-            foreach (var innerWriter in _innerWriters)
-            {
-                innerWriter.Write(value);
-            }
+            throw new ArgumentException($"'{nameof(innerWriters)}' cannot contain nulls.");
         }
+    }
 
-        public override void Write(string value)
-        {
-            foreach (var innerWriter in _innerWriters)
-            {
-                innerWriter.Write(value);
-            }
-        }
+    public override Encoding Encoding { get; }
 
-        public override async Task WriteAsync(char value)
-        {
-            foreach (var innerWriter in _innerWriters)
-            {
-                await innerWriter.WriteAsync(value);
-            }
-        }
+    public IReadOnlyList<TextWriter> InnerWriters => _innerWriters;
 
-        public override async Task WriteAsync(string value)
+    public override void Write(char value)
+    {
+        foreach (var innerWriter in _innerWriters)
         {
-            foreach (var innerWriter in _innerWriters)
-            {
-                await innerWriter.WriteAsync(value);
-            }
+            innerWriter.Write(value);
         }
+    }
 
-        protected override void Dispose(bool disposing)
+    public override void Write(string? value)
+    {
+        foreach (var innerWriter in _innerWriters)
         {
-            _innerWriters.Clear();
+            innerWriter.Write(value);
         }
+    }
+
+    public override async Task WriteAsync(char value)
+    {
+        foreach (var innerWriter in _innerWriters)
+        {
+            await innerWriter.WriteAsync(value);
+        }
+    }
+
+    public override async Task WriteAsync(string? value)
+    {
+        foreach (var innerWriter in _innerWriters)
+        {
+            await innerWriter.WriteAsync(value);
+        }
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        _innerWriters.Clear();
     }
 }
