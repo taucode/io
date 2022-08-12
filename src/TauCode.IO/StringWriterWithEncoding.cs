@@ -1,21 +1,18 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.Text;
 
-namespace TauCode.IO
+namespace TauCode.IO;
+
+public sealed class StringWriterWithEncoding : StringWriter
 {
-    public sealed class StringWriterWithEncoding : StringWriter
+    public StringWriterWithEncoding()
+        : this(Encoding.UTF8)
     {
-        public StringWriterWithEncoding()
-            : this(Encoding.UTF8)
-        {
-        }
-
-        public StringWriterWithEncoding(Encoding encoding)
-        {
-            this.Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
-        }
-
-        public override Encoding Encoding { get; }
     }
+
+    public StringWriterWithEncoding(Encoding encoding)
+    {
+        this.Encoding = encoding ?? throw new ArgumentNullException(nameof(encoding));
+    }
+
+    public override Encoding Encoding { get; }
 }
