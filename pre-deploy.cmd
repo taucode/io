@@ -1,12 +1,9 @@
 dotnet restore
 
-dotnet clean --configuration Debug
-dotnet clean --configuration Release
+dotnet build TauCode.IO.sln -c Debug
+dotnet build TauCode.IO.sln -c Release
 
-dotnet build --configuration Debug
-dotnet build --configuration Release
-
-dotnet test -c Debug .\test\TauCode.IO.Tests\TauCode.IO.Tests.csproj
-dotnet test -c Release .\test\TauCode.IO.Tests\TauCode.IO.Tests.csproj
+dotnet test TauCode.IO.sln -c Debug
+dotnet test TauCode.IO.sln -c Release
 
 nuget pack nuget\TauCode.IO.nuspec
