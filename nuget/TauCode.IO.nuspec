@@ -2,25 +2,27 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>TauCode.IO</id>
-    <version>1.8.1-alpha.1.2023-04-10.17-01</version>
+    <version>2.0.1-alpha.1.2024-10-14.08-43</version>
     <authors>TauCode</authors>
     <owners>TauCode</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="file">LICENSE</license>
     <projectUrl>https://github.com/taucode/io</projectUrl>
     <repository type="git" url="https://github.com/taucode/io"/>
+    <readme>README.md</readme>
     <description>TauCode I/O support library</description>
     <releaseNotes>
-      Developing release 1.8.1.
+      Developing release 2.0.1.
     </releaseNotes>
     <tags>taucode io</tags>
     <dependencies>
-      <group targetFramework=".NETCoreApp6.0">
+      <group targetFramework="net8.0">
       </group>
     </dependencies>
   </metadata>
   <files>
     <file src="..\LICENSE*" target="" />
-    <file src="..\src\TauCode.IO\bin\Release\net6.0\TauCode.IO.dll" target="lib\net6.0" />
+    <file src="..\README.md" target="" />
+    <file src="..\src\TauCode.IO\bin\Release\net8.0\TauCode.IO.dll" target="lib\net8.0" />
   </files>
 </package>
