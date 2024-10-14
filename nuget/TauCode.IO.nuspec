@@ -23,6 +23,6 @@
   <files>
     <file src="..\LICENSE*" target="" />
     <file src="..\README.md" target="" />
-    <file src="..\src\TauCode.IO\bin\Release\net6.0\TauCode.IO.dll" target="lib\net6.0" />
+    <file src="..\src\TauCode.IO\bin\Release\net8.0\TauCode.IO.dll" target="lib\net8.0" />
   </files>
 </package>
